@@ -6,6 +6,10 @@ function Item(name, sell_in, quality) {
   this.name = name;
   this.sell_in = sell_in;
   this.quality = quality;
+
+  this.increaseQuality = function() {
+    if (this.quality < 50) this.quality++;
+  }
 }
 
 var items = [];
@@ -19,19 +23,13 @@ function update_quality() {
         }
       }
     } else {
-      if (items[i].quality < 50) {
-        items[i].quality = items[i].quality + 1
-        if (items[i].name == backstagePass) {
-          if (items[i].sell_in < 11) {
-            if (items[i].quality < 50) {
-              items[i].quality = items[i].quality + 1
-            }
-          }
-          if (items[i].sell_in < 6) {
-            if (items[i].quality < 50) {
-              items[i].quality = items[i].quality + 1
-            }
-          }
+      items[i].increaseQuality();
+      if (items[i].name == backstagePass) {
+        if (items[i].sell_in < 11) {
+          items[i].increaseQuality();
+        }
+        if (items[i].sell_in < 6) {
+          items[i].increaseQuality();
         }
       }
     }
@@ -50,9 +48,7 @@ function update_quality() {
           items[i].quality = items[i].quality - items[i].quality
         }
       } else {
-        if (items[i].quality < 50) {
-          items[i].quality = items[i].quality + 1
-        }
+        items[i].increaseQuality();
       }
     }
   }
