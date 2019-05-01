@@ -24,38 +24,24 @@ var items = [];
 
 function update_quality() {
   for (var i = 0; i < items.length; i++) {
-    if (items[i].name != agedBrie && items[i].name != backstagePass) {
-      if (items[i].name != sulfuras) {
-        items[i].decreaseQuality();
+    // TODO: Make subclass inherit Item class
+    if (items[i].name === agedBrie) {
+      items[i].getOld();
+      items[i].increaseQuality();
+    } else if (items[i].name === sulfuras) {
+    } else if (items[i].name === backstagePass) {
+      items[i].getOld();
+      if (items[i].sell_in >= 0) {
+        items[i].increaseQuality();
+        if (items[i].sell_in < 10) items[i].increaseQuality();
+        if (items[i].sell_in < 5) items[i].increaseQuality();
+      } else {
+        items[i].quality = 0;
       }
     } else {
-      items[i].increaseQuality();
-      if (items[i].name == backstagePass) {
-        if (items[i].sell_in < 11) {
-          items[i].increaseQuality();
-        }
-        if (items[i].sell_in < 6) {
-          items[i].increaseQuality();
-        }
-      }
-    }
-
-    if (items[i].name != sulfuras) {
       items[i].getOld();
-    }
-
-    if (items[i].sell_in < 0) {
-      if (items[i].name != agedBrie) {
-        if (items[i].name != backstagePass) {
-          if (items[i].name != sulfuras) {
-            items[i].decreaseQuality();
-          }
-        } else {
-          items[i].quality = items[i].quality - items[i].quality
-        }
-      } else {
-        items[i].increaseQuality();
-      }
+      items[i].decreaseQuality();
+      if (items[i].sell_in < 0) items[i].decreaseQuality();
     }
   }
 }
