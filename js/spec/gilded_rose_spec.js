@@ -110,6 +110,12 @@ describe('Gilded Rose', () => {
     expect(items[0].quality).toEqual(80);
   });
 
+  it('should be 80 legendary item quality', () => {
+    items.push(new Item(sulfuras, -10, 0));
+    update_quality();
+    expect(items[0].quality).toEqual(80);
+  });
+
   // Backstage passes
   it('should decrease by 1 backstage passes quality 11 days+', () => {
     items.push(new Item(backstagePass, 12, 10));

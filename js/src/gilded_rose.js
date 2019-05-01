@@ -29,6 +29,7 @@ function update_quality() {
       items[i].getOld();
       items[i].increaseQuality();
     } else if (items[i].name === sulfuras) {
+      items[i].quality = 80;
     } else if (items[i].name === backstagePass) {
       items[i].getOld();
       if (items[i].sell_in >= 10) {
