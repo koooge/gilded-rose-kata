@@ -1,8 +1,14 @@
 describe('Gilded Rose', () => {
+  const agedBrie = 'Aged Brie';
+  const sulfuras = 'Sulfuras, Hand of Ragnaros';
+  const backstagePass = 'Backstage passes to a TAFKAL80ETC concert';
+  const conjured = 'Conjured Mana Cake';
+
   beforeEach(() => {
     items = [];
   });
 
+  // normal items
   it('should foo', () => {
     items.push(new Item('foo', 0, 0));
     update_quality();
@@ -58,4 +64,32 @@ describe('Gilded Rose', () => {
     expect(items[0].sell_in).toEqual(-12);
     expect(items[0].quality).toEqual(0);
   });
+
+  // 'Aged Brie'
+  it('should increase by 1 "Aged Brie" quality', () => {
+    items.push(new Item(agedBrie, 4, 0));
+    update_quality();
+    expect(items[0].name).toEqual(agedBrie);
+    expect(items[0].sell_in).toEqual(3);
+    expect(items[0].quality).toEqual(1);
+    update_quality();
+    expect(items[0].quality).toEqual(2);
+    update_quality();
+    expect(items[0].quality).toEqual(3);
+  });
+
+  it('should increase by 1 "Aged Brie" quality up to 50', () => {
+    items.push(new Item(agedBrie, 0, 49));
+    update_quality();
+    expect(items[0].sell_in).toEqual(-1);
+    expect(items[0].quality).toEqual(50);
+    update_quality();
+    expect(items[0].quality).toEqual(50);
+  });
+
+  // legencary item 'Sulfuras'
+
+  // Backstage passes
+
+  // conjured item 'Conjured'
 });
