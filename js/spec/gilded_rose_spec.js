@@ -172,4 +172,49 @@ describe('Gilded Rose', () => {
   });
 
   // conjured item 'Conjured'
+  it('should decrease by 2 conjured item quality', () => {
+    items.push(new Item(conjured, 10, 10));
+    update_quality();
+    expect(items[0].sell_in).toEqual(9);
+    expect(items[0].quality).toEqual(8);
+    update_quality();
+    expect(items[0].sell_in).toEqual(8);
+    expect(items[0].quality).toEqual(6);
+    update_quality();
+    expect(items[0].sell_in).toEqual(7);
+    expect(items[0].quality).toEqual(4);
+  });
+
+  it('should decrease by 4 expired sell_in conjured item quality', () => {
+    items.push(new Item(conjured, 1, 10));
+    update_quality();
+    expect(items[0].sell_in).toEqual(0);
+    expect(items[0].quality).toEqual(8);
+    update_quality();
+    expect(items[0].sell_in).toEqual(-1);
+    expect(items[0].quality).toEqual(4);
+    update_quality();
+    expect(items[0].sell_in).toEqual(-2);
+    expect(items[0].quality).toEqual(0);
+  });
+
+  it('should not be negative conjured item quality', () => {
+    items.push(new Item(conjured, 3, 1));
+    update_quality();
+    expect(items[0].sell_in).toEqual(2);
+    expect(items[0].quality).toEqual(0);
+    update_quality();
+    expect(items[0].sell_in).toEqual(1);
+    expect(items[0].quality).toEqual(0);
+  });
+
+  it('should not be negative expired conjured item quality', () => {
+    items.push(new Item(conjured, -1, 3));
+    update_quality();
+    expect(items[0].sell_in).toEqual(-2);
+    expect(items[0].quality).toEqual(0);
+    update_quality();
+    expect(items[0].sell_in).toEqual(-3);
+    expect(items[0].quality).toEqual(0);
+  });
 });

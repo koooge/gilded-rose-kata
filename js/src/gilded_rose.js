@@ -1,6 +1,7 @@
 var agedBrie = 'Aged Brie';
 var sulfuras = 'Sulfuras, Hand of Ragnaros';
 var backstagePass = 'Backstage passes to a TAFKAL80ETC concert';
+var conjured = 'Conjured Mana Cake';
 
 function Item(name, sell_in, quality) {
   this.name = name;
@@ -16,7 +17,7 @@ function Item(name, sell_in, quality) {
   }
 
   this.decreaseQuality = function(val = 1) {
-    if (this.quality > 0) this.quality -= val;
+    this.quality = this.quality - val > 0 ? this.quality - val : 0;
   }
 }
 
@@ -40,6 +41,13 @@ function update_quality() {
         items[i].increaseQuality(3);
       } else {
         items[i].quality = 0;
+      }
+    } else if (items[i].name === conjured) {
+      items[i].getOld();
+      if (items[i].sell_in >= 0) {
+        items[i].decreaseQuality(2);
+      } else {
+        items[i].decreaseQuality(4);
       }
     } else {
       items[i].getOld();
