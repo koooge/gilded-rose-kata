@@ -152,7 +152,7 @@ describe('Gilded Rose', () => {
   });
 
   it('should increase backstage passes quality up to 50', () => {
-    items.push(new Item(backstagePass, 8, 48));
+    items.push(new Item(backstagePass, 8, 49));
     update_quality();
     expect(items[0].sell_in).toEqual(7);
     expect(items[0].quality).toEqual(50);

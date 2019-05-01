@@ -13,7 +13,7 @@ function Item(name, sell_in, quality) {
   }
 
   this.increaseQuality = function(val = 1) {
-    if (this.quality < 50) this.quality += val;
+    this.quality = this.quality + val < 50 ? this.quality + val : 50;
   }
 
   this.decreaseQuality = function(val = 1) {
