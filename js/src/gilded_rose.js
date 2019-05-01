@@ -7,6 +7,10 @@ function Item(name, sell_in, quality) {
   this.sell_in = sell_in;
   this.quality = quality;
 
+  this.getOld = function() {
+    this.sell_in--;
+  }
+
   this.increaseQuality = function() {
     if (this.quality < 50) this.quality++;
   }
@@ -35,9 +39,11 @@ function update_quality() {
         }
       }
     }
+
     if (items[i].name != sulfuras) {
-      items[i].sell_in = items[i].sell_in - 1;
+      items[i].getOld();
     }
+
     if (items[i].sell_in < 0) {
       if (items[i].name != agedBrie) {
         if (items[i].name != backstagePass) {
