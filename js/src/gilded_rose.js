@@ -25,7 +25,7 @@ var items = [];
 
 function update_quality() {
   for (var i = 0; i < items.length; i++) {
-    // TODO: Make subclass inherit Item class
+    // TODO: Make each subclass inherit Item class
     if (items[i].name === agedBrie) {
       items[i].getOld();
       items[i].increaseQuality();

@@ -27,7 +27,7 @@ describe('Gilded Rose', () => {
     expect(items[2].name).toEqual('baz');
   });
 
-  // TODO: test items array should not OOM
+  // TODO: test items array should not occur OOM in case of instanciate lots of Item
 
   it('should decrease by 1 item quality', () => {
     items.push(new Item('foo', 10, 10));
@@ -217,4 +217,6 @@ describe('Gilded Rose', () => {
     expect(items[0].sell_in).toEqual(-3);
     expect(items[0].quality).toEqual(0);
   });
+
+  // TODO: Create testcases of Item's method getOld(), increaseQuality() and decreaseQuality()
 });
