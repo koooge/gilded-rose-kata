@@ -111,6 +111,59 @@ describe('Gilded Rose', () => {
   });
 
   // Backstage passes
+  it('should decrease by 1 backstage passes quality 11 days+', () => {
+    items.push(new Item(backstagePass, 12, 10));
+    update_quality();
+    expect(items[0].name).toEqual(backstagePass);
+    expect(items[0].sell_in).toEqual(11);
+    expect(items[0].quality).toEqual(11);
+  });
+
+  it('should increase by 2 backstage passes quality 10-6 days', () => {
+    items.push(new Item(backstagePass, 11, 10));
+    update_quality();
+    expect(items[0].sell_in).toEqual(10);
+    expect(items[0].quality).toEqual(11);
+    update_quality();
+    expect(items[0].sell_in).toEqual(9);
+    expect(items[0].quality).toEqual(13);
+    update_quality();
+    expect(items[0].sell_in).toEqual(8);
+    expect(items[0].quality).toEqual(15);
+  });
+
+  it('should increase by 3 backstage passes quality 5-1 days', () => {
+    items.push(new Item(backstagePass, 6, 10));
+    update_quality();
+    expect(items[0].sell_in).toEqual(5);
+    expect(items[0].quality).toEqual(12);
+    update_quality();
+    expect(items[0].sell_in).toEqual(4);
+    expect(items[0].quality).toEqual(15);
+    update_quality();
+    expect(items[0].sell_in).toEqual(3);
+    expect(items[0].quality).toEqual(18);
+  });
+
+  it('should increase backstage passes quality up to 50', () => {
+    items.push(new Item(backstagePass, 8, 48));
+    update_quality();
+    expect(items[0].sell_in).toEqual(7);
+    expect(items[0].quality).toEqual(50);
+    update_quality();
+    expect(items[0].sell_in).toEqual(6);
+    expect(items[0].quality).toEqual(50);
+  });
+
+  it('should be zero backstage passes quality after the concert', () => {
+    items.push(new Item(backstagePass, 1, 30));
+    update_quality();
+    expect(items[0].sell_in).toEqual(0);
+    expect(items[0].quality).toEqual(33);
+    update_quality();
+    expect(items[0].sell_in).toEqual(-1);
+    expect(items[0].quality).toEqual(0);
+  });
 
   // conjured item 'Conjured'
 });
