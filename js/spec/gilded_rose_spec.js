@@ -87,7 +87,28 @@ describe('Gilded Rose', () => {
     expect(items[0].quality).toEqual(50);
   });
 
-  // legencary item 'Sulfuras'
+  // legendary item 'Sulfuras'
+  it('should not alter legendary item sell_in', () => {
+    items.push(new Item(sulfuras, 1, 80));
+    update_quality();
+    expect(items[0].name).toEqual(sulfuras);
+    expect(items[0].sell_in).toEqual(1);
+    expect(items[0].quality).toEqual(80);
+    update_quality();
+    expect(items[0].sell_in).toEqual(1);
+    expect(items[0].quality).toEqual(80);
+  });
+ 
+  it('should not alter legendary item quality', () => {
+    items.push(new Item(sulfuras, -10, 80));
+    update_quality();
+    expect(items[0].name).toEqual(sulfuras);
+    expect(items[0].sell_in).toEqual(-10);
+    expect(items[0].quality).toEqual(80);
+    update_quality();
+    expect(items[0].sell_in).toEqual(-10);
+    expect(items[0].quality).toEqual(80);
+  });
 
   // Backstage passes
 
