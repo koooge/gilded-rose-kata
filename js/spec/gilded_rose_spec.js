@@ -2,7 +2,7 @@ describe('Gilded Rose', () => {
   const agedBrie = 'Aged Brie';
   const sulfuras = 'Sulfuras, Hand of Ragnaros';
   const backstagePass = 'Backstage passes to a TAFKAL80ETC concert';
-  const conjured = 'Conjured Mana Cake';
+//  const conjured = 'Conjured Mana Cake';
 
   beforeEach(() => {
     items = [];
@@ -172,51 +172,27 @@ describe('Gilded Rose', () => {
   });
 
   // conjured item 'Conjured'
-  it('should decrease by 2 conjured item quality', () => {
-    items.push(new Item(conjured, 10, 10));
+  it('should increase by 2 "Conjured, Aged Brie" quality', () => {
+    items.push(new Item(`Conjured, ${agedBrie}`, 4, 0));
     update_quality();
-    expect(items[0].sell_in).toEqual(9);
-    expect(items[0].quality).toEqual(8);
+    expect(items[0].name).toEqual(`Conjured, ${agedBrie}`);
+    expect(items[0].sell_in).toEqual(3);
+    expect(items[0].quality).toEqual(2);
     update_quality();
-    expect(items[0].sell_in).toEqual(8);
-    expect(items[0].quality).toEqual(6);
-    update_quality();
-    expect(items[0].sell_in).toEqual(7);
     expect(items[0].quality).toEqual(4);
+    update_quality();
+    expect(items[0].quality).toEqual(6);
   });
 
-  it('should decrease by 4 expired sell_in conjured item quality', () => {
-    items.push(new Item(conjured, 1, 10));
-    update_quality();
-    expect(items[0].sell_in).toEqual(0);
-    expect(items[0].quality).toEqual(8);
+  it('should increase by 2 "Conjured, Aged Brie" quality up to 50', () => {
+    items.push(new Item(`Conjured, ${agedBrie}`, 0, 49));
     update_quality();
     expect(items[0].sell_in).toEqual(-1);
-    expect(items[0].quality).toEqual(4);
+    expect(items[0].quality).toEqual(50);
     update_quality();
-    expect(items[0].sell_in).toEqual(-2);
-    expect(items[0].quality).toEqual(0);
+    expect(items[0].quality).toEqual(50);
   });
 
-  it('should not be negative conjured item quality', () => {
-    items.push(new Item(conjured, 3, 1));
-    update_quality();
-    expect(items[0].sell_in).toEqual(2);
-    expect(items[0].quality).toEqual(0);
-    update_quality();
-    expect(items[0].sell_in).toEqual(1);
-    expect(items[0].quality).toEqual(0);
-  });
-
-  it('should not be negative expired conjured item quality', () => {
-    items.push(new Item(conjured, -1, 3));
-    update_quality();
-    expect(items[0].sell_in).toEqual(-2);
-    expect(items[0].quality).toEqual(0);
-    update_quality();
-    expect(items[0].sell_in).toEqual(-3);
-    expect(items[0].quality).toEqual(0);
-  });
 
   // TODO: Create testcases of Item's method getOld(), increaseQuality() and decreaseQuality()
 });
